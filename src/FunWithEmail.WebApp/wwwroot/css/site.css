@@ -1,15 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Salsa&display=swap');
+
 html {
-  font-size: 14px;
+	font-size: 14px;
+	background-color: #29235c;
+	font-family: 'Salsa', Arial, Helvetica, sans-serif;
+	color: #fff;
+	text-align: center;
+}
+a {
+	color: #e6007e;
 }
 
 @media (min-width: 768px) {
   html {
     font-size: 16px;
   }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
@@ -19,4 +24,16 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+header > img {
+	margin: 10px auto;
+	max-width: 300px;
+	display: block;
+}
+
+input {
+	padding: 8px;
+	border-radius: 8px;
+	font-family: 'Salsa', Arial, Helvetica, sans-serif;
 }
