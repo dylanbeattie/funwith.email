@@ -40,7 +40,15 @@ Takes a single string input "email"
 * Adds a `Func<ValueTask>` to the background worker service which actually sends the emails
 * 
 
+Settings and User Secrets
 
+SMTP settings for local/dev systems are managed using dotnet user secrets.
+
+All of the user secret JSON files are stored in a single folder. On Windows it is `%APPDATA%\Microsoft\UserSecrets`, and on Linux/MacOS it is `~/.microsoft/usersecrets`.
+
+All you need to do is take all of those JSON files and put them in the same folder on the other machine. And you are done!
+
+This does raise the point again that *user secrets* isn't really a secret store. It uses un-encrypted JSON files stored in a folder that is not part of your project folder. The main usefulness comes from the fact that you can't accidentally commit them to version control. And they also enable per-developer settings. The name might not be the best one :)
 
 
 
