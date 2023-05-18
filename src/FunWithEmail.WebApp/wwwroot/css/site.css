@@ -39,6 +39,19 @@ input {
 	font-family: 'Salsa', Arial, Helvetica, sans-serif;
 }
 
+input#email-input {
+	font-size: 200%;
+	width: 300px;
+	margin: 16px;
+}
+	input[type=submit] {
+		font-size: 150%;
+		padding: 10px;
+		border: 2px solid #95C11F;
+		background-color: #95C11F;
+		
+	}
+
 footer {
 	position: fixed;
 	bottom: 0px;
@@ -51,22 +64,35 @@ div#status-grid {
 	padding: 32px;
 }
 
-	div#status-grid span {
-		font-size: 72px;
-		padding: 8px;
-		font-weight: bold;
-		display: inline-block;
+div#status-grid div.legend {
+		text-align: center;
+		border-width: 0 0 2px 0;
+		border-color: #fff;
+		border-style: solid;
+	}
+
+div#status-grid div.legend span {
+		font-size: 36px;
+		padding: 16px;
 		color: #E6007E;
 	}
 
-		div#status-grid span.Queued {
-			color: #36A9E1;
-		}
+div#status-grid span {
+	font-size: 72px;
+	padding: 8px;
+	font-weight: bold;
+	display: inline-block;
+	color: #E6007E;
+}
 
-		div#status-grid span.Sent {
-			color: #F9B233;
-		}
+	div#status-grid span.Queued, div#status-grid div.legend span.Queued {
+		color: #36A9E1;
+	}
 
-		div#status-grid span.Verified {
-			color: #95C11F;
-		}
+	div#status-grid span.Sent, div#status-grid div.legend span.Sent {
+		color: #F9B233;
+	}
+
+	div#status-grid span.Verified, div#status-grid div.legend span.Verified {
+		color: #95C11F;
+	}

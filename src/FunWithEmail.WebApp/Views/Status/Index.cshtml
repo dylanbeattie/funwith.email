@@ -1,13 +1,17 @@
 @model IDictionary<Guid, EmailStatus>
 
+
 <div id="status-grid">
-	<span>Generated</span> <span class="Queued">Queued</span> <span class="Sent">Sent</span> <span class="Verified">Verified</span><br />
-	<hr />
-	@foreach (var item in Model) {
-		<span id="mail-@item.Key" class="@item.Value.ToString()">
-			@@
-		</span>
-	}
+	<div class="legend">
+		<span>Generated</span> <span class="Queued">Queued</span> <span class="Sent">Sent</span> <span class="Verified">Verified</span><br />
+	</div>
+	<div id="statuses">
+		@foreach (var item in Model) {
+			<span id="mail-@item.Key" class="@item.Value.ToString()">
+				@@
+			</span>
+		}
+	</div>
 
 </div>
 
@@ -30,7 +34,7 @@
 		};
 
 		connection.onclose(async () => await start());
-		var grid = document.getElementById("status-grid");
+		var grid = document.getElementById("statuses");
 		connection.on("UpdateStatus",
 			(user, message) => {
 				console.log(user);
