@@ -27,8 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="MimeKit" Version="4.0.0" />
+    <PackageReference Include="Mjml.Net" Version="1.22.0" />
   </ItemGroup>
 
 </Project>

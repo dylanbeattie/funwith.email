@@ -1,0 +1,26 @@
+<mjml>
+  <mj-head>
+    <mj-title>Welcome to COMPANY LOGO</mj-title>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-image width="220px" src="cid:__LOGO_CONTENT_ID__"></mj-image>
+
+        <mj-divider border-color="#001122"></mj-divider>
+
+        <mj-text font-size="20px" font-family="helvetica" font-weight="bold">Dear Valued Customer,</mj-text>
+        <mj-text line-height="26px" font-size="16px" font-family="helvetica">Thank you for signing up with COMPANY LOGO.</mj-text>
+<mj-text line-height="26px" font-size="16px" font-family="helvetica">
+  			We look forward to selling your data on the darkweb and generally making as much money as we can out of you while pretending that we still care.
+        </mj-text>
+        <mj-button border-radius="8px" background-color="#003366" font-size="16px" href="https://funwith.email/confirm/{id}">
+        Confirm Registration</mj-button>
+        <mj-divider border-color="#001122"></mj-divider>
+        <mj-text font-size="10px" align="center" line-height="16px">
+          Copyright &copy; 2023 COMPANY LOGO<br />
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
