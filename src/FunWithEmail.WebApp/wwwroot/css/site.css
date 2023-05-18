@@ -40,16 +40,17 @@ input {
 }
 
 input#email-input {
-	font-size: 200%;
-	width: 300px;
+	font-size: 120%;
+	max-width: 480px;
+	width: 80%;
 	margin: 16px;
 }
 	input[type=submit] {
-		font-size: 150%;
+		font-size: 120%;
 		padding: 10px;
 		border: 2px solid #95C11F;
 		background-color: #95C11F;
-		
+
 	}
 
 footer {

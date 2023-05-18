@@ -31,17 +31,15 @@ public class GoController : Controller {
 	[HttpPost]
 	public async Task<IActionResult> Index(string email) {
 		try {
-			for (var counter = 0; counter < 8; counter++) {
-				var mailbox = new MailboxAddress(email, email);
-				logger.LogDebug(mailbox.Address);
-				var item = new MailItem(mailbox);
-				await tracker.UpdateStatus(item.Id, EmailStatus.Unknown);
-				await queue.AddEmailToQueue(item);
-				await tracker.UpdateStatus(item.Id, EmailStatus.Queued);
-			}
-
+			var mailbox = new MailboxAddress(email, email);
+			logger.LogDebug(mailbox.Address);
+			var item = new MailItem(mailbox);
+			await tracker.UpdateStatus(item.Id, EmailStatus.Unknown);
+			await queue.AddEmailToQueue(item);
+			await tracker.UpdateStatus(item.Id, EmailStatus.Queued);
 			return View("Sent");
-		} catch (Exception ex) {
+		}
+		catch (Exception ex) {
 			ViewData["Error"] = ex.Message;
 			return View();
 		}

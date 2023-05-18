@@ -19,7 +19,7 @@ var (html, _) = mjmlRenderer.Render(mjml);
 var mailRenderer = new MailRenderer(html);
 builder.Services.AddSingleton(mailRenderer);
 builder.Services.AddSingleton<StatusTracker>();
-foreach (var server in smtpServers.Where(s => s.Value.TestMode)) {
+foreach (var server in smtpServers) {
 	Console.WriteLine("Creating SMTP relay worker for " + server.Key);
 	builder.Services.AddSingleton<IHostedService>(provider => {
 		var logger = provider.GetService<ILogger<MailSender>>();
