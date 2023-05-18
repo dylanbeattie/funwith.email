@@ -8,12 +8,13 @@ IConfiguration config = new ConfigurationBuilder()
 	.AddUserSecrets(typeof(Program).Assembly)
 	.Build();
 
+var from = "hello@funwith.email";
 var smtpServers = config.GetSection("Smtp").Get<SmtpSettings[]>();
-var recipients = new[] { "dylan@fm.funwith.email" };
+var recipients = new[] { "dylan@fm.funwith.email", "dylan@dylanbeattie.net", "dylan.beattie@gmail.com" };
 foreach (var server in smtpServers) {
 	var client = server.CreateClient();
 	foreach (var rcpt in recipients) {
-		client.Send("dylan@dylanbeattie.net", rcpt, $"Test message to {rcpt}", $"Test email to {rcpt}");
+		client.Send(from, rcpt, $"Test message from {from} to {rcpt} via {server}", $"Test email from {from} to {rcpt} via {server}");
 		Console.WriteLine($"Sent to {rcpt} via {server}");
 	}
 }

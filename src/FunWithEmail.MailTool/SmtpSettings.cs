@@ -6,14 +6,14 @@ public class SmtpSettings {
 	public int Port { get; set; } = 25;
 	public string? Username { get; set; }
 	public string? Password { get; set; }
-	public bool UseSsl { get; set; }
+	public bool EnableSsl { get; set; }
 	public override string ToString() => $"{Host}:{Port}";
 
 	public SmtpClient CreateClient() {
 		var client = new SmtpClient(Host, Port);
 		if (String.IsNullOrEmpty(Username)) return client;
 		client.Credentials = new NetworkCredential(Username, Password);
-		if (UseSsl) client.EnableSsl = true;
+		if (EnableSsl) client.EnableSsl = true;
 		return client;
 	}
 }
