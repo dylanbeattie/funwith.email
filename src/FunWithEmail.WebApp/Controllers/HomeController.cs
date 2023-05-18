@@ -2,23 +2,21 @@ using System.Diagnostics;
 using FunWithEmail.WebApp.Models;
 using FunWithEmail.WebApp.Services;
 using Microsoft.AspNetCore.Mvc;
+using MimeKit;
 
 namespace FunWithEmail.WebApp.Controllers;
 
 public class HomeController : Controller {
 	private readonly ILogger<HomeController> logger;
 	private readonly Dictionary<Guid, EmailState> states;
-	private readonly Dictionary<string, SmtpConfiguration> smtpConfigurations;
-	private readonly BackgroundTaskQueue tasks;
+	private readonly MailQueue queue;
 
 	public HomeController(ILogger<HomeController> logger,
 		Dictionary<Guid, EmailState> states,
-		Dictionary<string, SmtpConfiguration> smtpConfigurations,
-		BackgroundTaskQueue tasks) {
+		MailQueue queue) {
 		this.logger = logger;
 		this.states = states;
-		this.smtpConfigurations = smtpConfigurations;
-		this.tasks = tasks;
+		this.queue= queue;
 	}
 
 	public IActionResult Index() {
@@ -31,15 +29,11 @@ public class HomeController : Controller {
 		var state = new EmailState(email);
 		states.Add(id, state);
 		for (var counter = 0; counter < 100; counter++) {
-			await tasks.EnqueueTaskAsync(async () => await SendMail(counter));
+			var mailbox = new MailboxAddress(String.Empty, $"test{counter}@dylanbeattie.net");
+			logger.LogDebug(mailbox.Address);
+			queue.AddEmailToQueue(mailbox);
 		}
-
 		return Content("yeah!");
-	}
-
-	private async Task SendMail(int counter) {
-		Console.WriteLine(Thread.CurrentThread.ManagedThreadId + ":" + counter);
-		await Task.Yield();
 	}
 
 	public IActionResult Privacy() {

@@ -12,4 +12,8 @@
 		<PackageReference Include="MimeKit" Version="4.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\FunWithEmail.MailTool\FunWithEmail.MailTool.csproj" />
+	</ItemGroup>
+
 </Project>
