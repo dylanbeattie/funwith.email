@@ -13,7 +13,7 @@ public class MailRenderer {
 
 	public MimeEntity MakeMailBody(MailItem item, SmtpSettings smtp) {
 		var websiteBaseUrl = smtp.TestMode ? "http://localhost:5102" : "https://funwith.email";
-		var confirmationUrl = $"{websiteBaseUrl}/confirm/{item.Id:N}";
+		var confirmationUrl = $"{websiteBaseUrl}/go/confirm/{item.Id:N}";
 		var bb = new BodyBuilder();
 		var logo = bb.LinkedResources.Add("funwithemail.png");
 		logo.ContentId = MimeUtils.GenerateMessageId("funwith.email");

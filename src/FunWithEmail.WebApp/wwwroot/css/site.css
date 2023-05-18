@@ -7,23 +7,24 @@ html {
 	color: #fff;
 	text-align: center;
 }
+
 a {
 	color: #e6007e;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+	html {
+		font-size: 16px;
+	}
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+	position: relative;
+	min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+	margin-bottom: 60px;
 }
 
 header > img {
@@ -37,3 +38,35 @@ input {
 	border-radius: 8px;
 	font-family: 'Salsa', Arial, Helvetica, sans-serif;
 }
+
+footer {
+	position: fixed;
+	bottom: 0px;
+	text-align: center;
+	padding: 8px;
+}
+
+div#status-grid {
+	text-align: left;
+	padding: 32px;
+}
+
+	div#status-grid span {
+		font-size: 72px;
+		padding: 8px;
+		font-weight: bold;
+		display: inline-block;
+		color: #E6007E;
+	}
+
+		div#status-grid span.Queued {
+			color: #36A9E1;
+		}
+
+		div#status-grid span.Sent {
+			color: #F9B233;
+		}
+
+		div#status-grid span.Verified {
+			color: #95C11F;
+		}

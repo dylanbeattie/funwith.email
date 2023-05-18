@@ -16,7 +16,7 @@ var from = new MailboxAddress("Company Logo", "hello@funwith.email");
 var smtpServers = config.GetSection("Smtp").Get<Dictionary<string, SmtpSettings>>();
 var recipients = new[] { "dylan@dylanbeattie.net" }; //  "dylan.beattie@gmail.com", "dylan@funwith.email", "dylan@fm.funwith.email", };
 var renderer = new MjmlRenderer();
-var server = smtpServers["sendgrid.com"];
+var server = smtpServers["SocketLabs"];
 // foreach (var server in smtpServers.Values) {
 	var smtp = new SmtpClient();
 	smtp.Connect(server.Host, server.Port);

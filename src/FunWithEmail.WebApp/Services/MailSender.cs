@@ -1,5 +1,8 @@
+using System.Collections.Concurrent;
+using FunWithEmail.WebApp.Hubs;
 using FunWithEmail.WebApp.Models;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.SignalR;
 using MimeKit;
 
 namespace FunWithEmail.WebApp.Services;
@@ -8,12 +11,16 @@ public class MailSender : BackgroundService {
 	private readonly SmtpSettings smtp;
 	private readonly ILogger<MailSender> logger;
 	private readonly MailRenderer renderer;
+	private readonly StatusTracker statusTracker;
 	private readonly MailboxAddress from = new("Fun with Email", "hello@funwith.email");
 
-	public MailSender(MailQueue queue, string name, SmtpSettings smtp, MailRenderer renderer, ILogger<MailSender> logger) {
+	public MailSender(MailQueue queue, string name, SmtpSettings smtp, MailRenderer renderer,
+		StatusTracker statusTracker,
+		ILogger<MailSender> logger) {
 		MailQueue = queue;
 		this.smtp = smtp;
 		this.renderer = renderer;
+		this.statusTracker = statusTracker;
 		this.logger = logger;
 		logger.LogDebug($"MailSender() with {smtp}");
 	}
@@ -30,6 +37,7 @@ public class MailSender : BackgroundService {
 			try {
 				logger.LogDebug($"[Thread {Thread.CurrentThread.ManagedThreadId} {smtp} {mailItem}]");
 				await SendMail(mailItem);
+				await statusTracker.UpdateStatus(mailItem.Id, EmailStatus.Sent);
 			} catch (Exception ex) {
 				logger.LogError(ex, "Error occurred executing {mailbox}.", mailItem);
 			}
