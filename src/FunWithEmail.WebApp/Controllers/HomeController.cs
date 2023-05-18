@@ -16,7 +16,7 @@ public class HomeController : Controller {
 		MailQueue queue) {
 		this.logger = logger;
 		this.states = states;
-		this.queue= queue;
+		this.queue = queue;
 	}
 
 	public IActionResult Index() {
@@ -28,10 +28,11 @@ public class HomeController : Controller {
 		var id = Guid.NewGuid();
 		var state = new EmailState(email);
 		states.Add(id, state);
-		for (var counter = 0; counter < 100; counter++) {
+		for (var counter = 0; counter < 8; counter++) {
 			var mailbox = new MailboxAddress(String.Empty, $"test{counter}@dylanbeattie.net");
 			logger.LogDebug(mailbox.Address);
-			queue.AddEmailToQueue(mailbox);
+			var item = new MailItem(mailbox);
+			await queue.AddEmailToQueue(item);
 		}
 		return Content("yeah!");
 	}

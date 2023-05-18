@@ -16,4 +16,13 @@
 	  <ProjectReference Include="..\FunWithEmail.MailTool\FunWithEmail.MailTool.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="funwithemail.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Templates\FunWithEmail.mjml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>

@@ -5,4 +5,5 @@ public class SmtpSettings {
 	public string? Password { get; set; }
 	public bool EnableSsl { get; set; }
 	public override string ToString() => $"{Host}:{Port}";
+	public bool TestMode { get; set; } = false;
 }

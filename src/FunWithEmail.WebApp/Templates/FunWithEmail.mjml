@@ -1,0 +1,29 @@
+<mjml>
+  <mj-head>
+    <mj-title>Fun with Email!</mj-title>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-image width="240px" src="cid:__LOGO_CONTENT_ID__"></mj-image>
+        <mj-divider border-color="#E6007E"></mj-divider>
+        <mj-text font-size="20px" font-family="helvetica" font-weight="bold">Hello __RECIPIENT__!</mj-text>
+        <mj-text line-height="26px" font-size="16px" font-family="helvetica">
+			If you're reading this, then it worked. See?
+			Email is totally predictable and 100% reliable.
+		</mj-text>
+		<mj-text line-height="26px" font-size="16px" font-family="helvetica">
+  			Now click the button to confirm you've received this email:
+        </mj-text>
+        <mj-button border-radius="8px" background-color="#E6007E" font-size="24px" href="__CONFIRMATION_URL__">
+        Click me!</mj-button>
+		  <mj-divider border-color="#E6007E"></mj-divider>
+        <mj-text font-size="10px" align="center" line-height="16px">
+          funwith.email is a demo app created by dylan beattie.<br />
+          <a href="https://github.com/dylanbeattie/funwith.email">code on github</a><br />
+		  This email was sent via __SMTP_RELAY__.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
