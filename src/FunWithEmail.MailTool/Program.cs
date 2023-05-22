@@ -1,9 +1,9 @@
+using FunWithEmail.WebApp.Services;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 using MimeKit.Utils;
 using Mjml.Net;
-
 
 IConfiguration config = new ConfigurationBuilder()
 	.AddJsonFile("appSettings.json")

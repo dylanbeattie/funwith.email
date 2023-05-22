@@ -1,8 +1,10 @@
 namespace FunWithEmail.WebApp.Models;
 
-public enum EmailStatus {
-	Unknown,
+public enum MailStatus {
+	Accepted,
 	Queued,
 	Sent,
-	Verified
+	DeliveredToInbox,
+	DeliveredToJunk,
+	Error
 }

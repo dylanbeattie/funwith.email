@@ -1,27 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - FunWithEmail.WebApp</title>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/FunWithEmail.WebApp.styles.css" asp-append-version="true" />
-</head>
-<body>
+@{
+    Layout = "_NoHeader";
+}
 <header>
-	<img src="~/img/website-header-logo.svg" />
+	<img src="~/img/website-header-logo.svg" alt="Fun with Email site logo"/>
 </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer>
-            &copy; 2023 Dylan Beattie &bull; <a href="https://github.com/dylanbeattie/funwith.email/">code on github</a>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
+<div>
+    <main>
+        @RenderBody()
+    </main>
+</div>
+<footer>
+    &copy; 2023 Dylan Beattie &bull; <a href="https://github.com/dylanbeattie/funwith.email/">code on github</a>
+</footer>

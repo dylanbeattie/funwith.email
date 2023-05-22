@@ -1,0 +1,17 @@
+@using System.Text.Json
+@model MailItem
+<form method="POST" asp-action="Queue">
+    <input asp-for="Id" />
+    <h1>Awesome!</h1>
+    <p>Thank you, @Model.Recipient.Address</p>
+    <p>Now, please <strong>STAND UP</strong> * and</p>
+    <h1 style="font-size: 400%;">WAIT</h1>
+    <p>for the signal.</p>
+    <br />
+    <input type="submit" value="DO NOT PUSH THIS BUTTON YET" />
+</form>
+<p>
+    <small>
+        * If you can't stand up, just watch and laugh.
+    </small>
+</p>

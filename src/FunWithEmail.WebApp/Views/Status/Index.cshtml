@@ -1,57 +1,65 @@
-@model IDictionary<Guid, EmailStatus>
+@{
+    Layout = "_NoHeader";
+}
 
+@model IDictionary<Guid, MailStatus>
 
 <div id="status-grid">
-	<div class="legend">
-		<span>Generated</span> <span class="Queued">Queued</span> <span class="Sent">Sent</span> <span class="Verified">Verified</span><br />
-	</div>
-	<div id="statuses">
-		@foreach (var item in Model) {
-			<span id="mail-@item.Key" class="@item.Value.ToString()">
-				@@
-			</span>
-		}
-	</div>
+    <div class="legend">
+        <span class="accepted">Ready</span>
+        <span class="queued">Queued</span>
+        <span class="sent">Sent</span>
+        <span class="deliveredtoinbox">Delivered</span>
+        <span class="deliveredtojunk">Junk</span>
 
+    </div>
+    <div id="statuses">
+        @foreach (var item in Model)
+        {
+            <span id="mail-@item.Key" class="@item.Value.ToString().ToLowerInvariant()">
+                @@
+            </span>
+        }
+    </div>
 </div>
 
 @section Scripts {
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
-	<script>
-		const connection = new signalR.HubConnectionBuilder()
-			.withUrl("/hub")
-			.configureLogging(signalR.LogLevel.Information)
-			.build();
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/hub")
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
 
-		async function start() {
-			try {
-				await connection.start();
-				console.log("SignalR Connected.");
-			} catch (err) {
-				console.log(err);
-				setTimeout(start, 5000);
-			}
-		};
+        async function start() {
+            try {
+                await connection.start();
+                console.log("SignalR Connected.");
+            } catch (err) {
+                console.log(err);
+                setTimeout(start, 5000);
+            }
+        };
 
-		connection.onclose(async () => await start());
-		var grid = document.getElementById("statuses");
-		connection.on("UpdateStatus",
-			(user, message) => {
-				console.log(user);
-				console.log(message);
-				var data = JSON.parse(message);
-				var elementId = `mail-${data.id}`;
-				var element = document.getElementById(elementId);
-				if (element != null) {
-					element.className = data.status;
-				} else {
-					element = document.createElement("span");
-					element.id = elementId;
-					element.innerHTML = "@@";
-					grid.prepend(element);
-				}
-			});
-		start();
-	</script>
+        connection.onclose(async () => await start());
+        var grid = document.getElementById("statuses");
+        connection.on("UpdateStatus",
+            (user, message) => {
+                console.log(user);
+                console.log(message);
+                var data = JSON.parse(message);
+                var elementId = `mail-${data.id}`;
+                var element = document.getElementById(elementId);
+                if (element != null) {
+                    element.className = data.status;
+                } else {
+                    element = document.createElement("span");
+                    element.id = elementId;
+                    element.innerHTML = "@@";
+                    grid.prepend(element);
+                }
+            });
+        start();
+    </script>
 
 }

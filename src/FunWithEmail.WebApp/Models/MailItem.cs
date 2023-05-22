@@ -1,13 +1,17 @@
+using Microsoft.AspNetCore.Mvc;
 using MimeKit;
 
 namespace FunWithEmail.WebApp.Models;
 
 public class MailItem {
-	public Guid Id { get; set; } = Guid.NewGuid();
+	[HiddenInput]
+	public Guid Id { get; set; }
 	public MailboxAddress Recipient { get; set; }
-	public MailItem(MailboxAddress recipient) {
-		Recipient = recipient;
-	}
+	public string? SmtpRelay { get; set; }
+	public MailStatus Status { get; set; }
 
-	public override string ToString() => $"{Id}: {Recipient}";
+	public MailItem(Guid id, string emailAddress) {
+		Id = id;
+		Recipient = new(null, emailAddress);
+	}
 }

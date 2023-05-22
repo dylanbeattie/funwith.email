@@ -6,13 +6,15 @@ namespace FunWithEmail.WebApp.Services;
 
 public class MailRenderer {
 	private readonly string htmlTemplate;
+	private readonly bool developmentMode;
 
-	public MailRenderer(string htmlTemplate) {
+	public MailRenderer(string htmlTemplate, bool developmentMode) {
 		this.htmlTemplate = htmlTemplate;
+		this.developmentMode = developmentMode;
 	}
 
 	public MimeEntity MakeMailBody(MailItem item, SmtpSettings smtp) {
-		var websiteBaseUrl = smtp.TestMode ? "http://localhost:5102" : "https://funwith.email";
+		var websiteBaseUrl = developmentMode ? "http://localhost:5102" : "https://funwith.email";
 		var confirmationUrl = $"{websiteBaseUrl}/go/confirm/{item.Id:N}";
 		var bb = new BodyBuilder();
 		var logo = bb.LinkedResources.Add("funwithemail.png");

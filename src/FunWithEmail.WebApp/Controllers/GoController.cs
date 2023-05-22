@@ -1,13 +1,7 @@
-using System.Collections.Concurrent;
-using System.Diagnostics;
-using System.Net.NetworkInformation;
-using System.Text.Json;
 using FunWithEmail.WebApp.Hubs;
-using FunWithEmail.WebApp.Models;
 using FunWithEmail.WebApp.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-using MimeKit;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace FunWithEmail.WebApp.Controllers;
 
@@ -24,20 +18,13 @@ public class GoController : Controller {
 		this.queue = queue;
 	}
 
-	public IActionResult Index() {
-		return View();
-	}
+	public IActionResult Index() => View();
 
 	[HttpPost]
 	public async Task<IActionResult> Index(string email) {
 		try {
-			var mailbox = new MailboxAddress(email, email);
-			logger.LogDebug(mailbox.Address);
-			var item = new MailItem(mailbox);
-			await tracker.UpdateStatus(item.Id, EmailStatus.Unknown);
-			await queue.AddEmailToQueue(item);
-			await tracker.UpdateStatus(item.Id, EmailStatus.Queued);
-			return View("Sent");
+			var id = await tracker.Create(email);
+			return RedirectToAction(nameof(Wait), new { id });
 		}
 		catch (Exception ex) {
 			ViewData["Error"] = ex.Message;
@@ -45,8 +32,25 @@ public class GoController : Controller {
 		}
 	}
 
-	public async Task<IActionResult> Confirm(Guid id) {
-		await tracker.UpdateStatus(id, EmailStatus.Verified);
+	[HttpGet]
+	public IActionResult Wait(Guid id) {
+		if (tracker.TryGetItem(id, out var item)) return View(item);
+		return NotFound();
+	}
+
+	public async Task<IActionResult> Queue(Guid id) {
+		if (!tracker.TryGetItem(id, out var item)) return RedirectToAction(nameof(Index));
+		await queue.AddEmailToQueue(item);
+		await tracker.MarkAsQueued(id);
+		return View(item);
+	}
+
+	public async Task<IActionResult> Confirm(Guid id, bool junk) {
+		if (junk) {
+			await tracker.MarkAsDeliveredToJunk(id);
+		} else {
+			await tracker.MarkAsDeliveredToInbox(id);
+		}
 		return View();
 	}
 }

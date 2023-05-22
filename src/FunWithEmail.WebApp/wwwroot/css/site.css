@@ -39,61 +39,114 @@ input {
 	font-family: 'Salsa', Arial, Helvetica, sans-serif;
 }
 
-input#email-input {
-	font-size: 120%;
-	max-width: 480px;
-	width: 80%;
-	margin: 16px;
-}
+	input#email-input {
+		box-sizing: border-box;
+		font-size: 120%;
+		max-width: 480px;
+		width: 80%;
+		margin: 16px;
+	}
+
 	input[type=submit] {
 		font-size: 120%;
 		padding: 10px;
 		border: 2px solid #95C11F;
 		background-color: #95C11F;
-
 	}
 
 footer {
 	position: fixed;
-	bottom: 0px;
+	bottom: 0;
 	text-align: center;
 	padding: 8px;
 }
 
-div#status-grid {
+div#status-grid, div#report-grid {
 	text-align: left;
-	padding: 32px;
 }
 
-div#status-grid div.legend {
+div#report-grid h3 {
+	clear: both;
+	padding-top: 20px;
+}
+div#report-grid span {
+		padding: 0;
+		margin: 0;
+		width: 8px;
+		float: left;
+	}
+	div#report-grid span.accepted {
+		background-color: #fff;
+	}
+
+	div#report-grid span.queued {
+		background-color: #2daae1;
+	}
+
+	div#report-grid span.sent {
+		background-color: #F9B233;
+	}
+
+	div#report-grid span.deliveredtoinbox {
+		background-color: #95C11F;
+	}
+
+	div#report-grid span.deliveredtojunk {
+		background-color: #e6007e;
+	}
+
+div#report-grid span.error {
+		background-color: #000;
+	}
+
+	div#status-grid div.legend {
 		text-align: center;
 		border-width: 0 0 2px 0;
 		border-color: #fff;
 		border-style: solid;
 	}
 
-div#status-grid div.legend span {
-		font-size: 36px;
-		padding: 16px;
-		color: #E6007E;
+		div#status-grid div.legend span {
+			font-size: 24px;
+			padding: 16px;
+		}
+
+	div#status-grid span {
+		font-size: 48px;
+		padding: 4px;
+		font-weight: bold;
+		display: inline-block;
 	}
 
-div#status-grid span {
-	font-size: 72px;
-	padding: 8px;
-	font-weight: bold;
-	display: inline-block;
-	color: #E6007E;
+.accepted {
+	color: #fff;
 }
 
-	div#status-grid span.Queued, div#status-grid div.legend span.Queued {
-		color: #36A9E1;
-	}
+.queued {
+	color: #2daae1;
+}
 
-	div#status-grid span.Sent, div#status-grid div.legend span.Sent {
-		color: #F9B233;
-	}
+.sent {
+	color: #F9B233;
+}
 
-	div#status-grid span.Verified, div#status-grid div.legend span.Verified {
-		color: #95C11F;
-	}
+.deliveredtoinbox {
+	color: #95C11F;
+}
+
+.deliveredtojunk {
+	color: #e6007e;
+}
+
+.error {
+	color: #000;
+}
+
+hr {
+	box-sizing: border-box;
+	max-width: 480px;
+	width: 80%;
+	border-width: 2px 0 0 0;
+	border-style: solid;
+	border-color: #e6007e;
+}

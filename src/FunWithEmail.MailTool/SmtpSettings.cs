@@ -1,3 +1,8 @@
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+
+namespace FunWithEmail.WebApp.Services;
+
 public class SmtpSettings {
 	public string Host { get; set; } = "";
 	public int Port { get; set; } = 25;

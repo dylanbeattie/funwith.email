@@ -3,24 +3,30 @@ A demo app I built as part of my talk "Email vs Capitalism, or Why We Can't Have
 
 ## What it does:
 
-Users browse to https://funwith.email/
-
-A form asks them to enter their email address.
-
-When they do, the app will:
-
-* generate a unique identifier for them
-* Queue an email message to be sent
-* Show a page saying "thanks! Now check your email!"
+1. Users browse to https://funwith.email/go/. A form asks them to enter their email address.
+2. If the address is valid, a new MailItem is created and added to the Tracker. The Tracker maintains a record of all mail items since the app was last restarted (it's a singleton component wrapped around a `ConcurrentDictionary`).
+3. The user is redirected to `/go/wait/{guid}` - the "please stand up and wait for the signal" page
+4. When I give the signal, they click the "Go!" button
+5. When they click "Go", the app will queue their email message to be sent, update the tracker for that mail item, and show "Thanks - now check your email."
 
 The email message contains a link to verify receipt. When they click the link, it opens https://funwith.email/verify/{GUID}
 
-Their email is marked as received.
+Their email is marked as received, and the user gets a message saying "thank you! You can sit down now."
+
+Email status
+
+* **Accepted** - email's in the system and will be sent when they get the signal
+* **Queued** - email has been added to the task queue
+* **Sent** - email has been sent.
+* **DeliveredToInbox**  - the user's received the mail and clicked the link.
+* **DeliveredToJunk** - the user's recieved the email but clicked the link saying it went to their junk mail
+* **Error** - something went wrong sending the email.
 
 ## Behind the scenes:
 
 https://funwith.email/status shows the number of emails in the system - LIVE (we'll use SignalR for this)
 
+* 
 * How many are queued (but not sent yet)
 * How many are sent (but not verified yet)
 * How many are verified
