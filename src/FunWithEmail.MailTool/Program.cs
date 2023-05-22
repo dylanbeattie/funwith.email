@@ -2,8 +2,6 @@ using FunWithEmail.WebApp.Services;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
-using MimeKit.Utils;
-using Mjml.Net;
 
 IConfiguration config = new ConfigurationBuilder()
 	.AddJsonFile("appSettings.json")
@@ -11,42 +9,43 @@ IConfiguration config = new ConfigurationBuilder()
 	.AddUserSecrets(typeof(Program).Assembly)
 	.Build();
 
-var from = new MailboxAddress("Company Logo", "hello@funwith.email");
-// var from = new MailboxAddress("Company Logo", "do-not-reply@company-logo.com");
-var smtpServers = config.GetSection("Smtp").Get<Dictionary<string, SmtpSettings>>();
-var recipients = new[] { "dylan@dylanbeattie.net" }; //  "dylan.beattie@gmail.com", "dylan@funwith.email", "dylan@fm.funwith.email", };
-var renderer = new MjmlRenderer();
-var server = smtpServers["SocketLabs"];
-// foreach (var server in smtpServers.Values) {
+var from = new MailboxAddress("Fun with Email", "hello@funwith.email");
+var smtpServers = config.GetSection("Smtp")
+	.Get<Dictionary<string, SmtpSettings>>();
+
+foreach (var entry in smtpServers) {
+	var domain = entry.Key;
+	var server = entry.Value;
 	var smtp = new SmtpClient();
 	smtp.Connect(server.Host, server.Port);
 	if (server.Username != null) smtp.Authenticate(server.Username, server.Password);
+	var recipients = new[] {
+		$"hello@{domain}",
+		$"\"with spaces\"@{domain}",
+		$"two..dots@{domain}",
+		$"escaped\\ space@{domain}"
+	};
 	foreach (var rcpt in recipients) {
-		var mail = new MimeMessage();
-		// mail.Subject = "Fun with Email!";
-		mail.Subject = "Welcome to Company Logo";
-		mail.From.Add(from);
-		mail.To.Add(new MailboxAddress(rcpt, rcpt));
-		var bb = new BodyBuilder();
-		var text = $"Test email from {from} to {rcpt} via {server}";
-		bb.TextBody = text;
-//		var mjml = File.ReadAllText("Templates/Mail.mjml");
-		var mjml = File.ReadAllText("Templates/CompanyLogo.mjml");
-		var (html, errors) = renderer.Render(mjml);
-		var logo = bb.LinkedResources.Add("company-logo-dark-mode.png");
-		// var logo = bb.LinkedResources.Add("funwithemail.png");
-		logo.ContentId = MimeUtils.GenerateMessageId();
-		html = html.Replace("__LOGO_CONTENT_ID__", logo.ContentId);
-		html = html.Replace("__RECIPIENT__", rcpt);
-		html = html.Replace("__SMTP_RELAY__", server.ToString());
-		bb.HtmlBody = html;
-		mail.Body = bb.ToMessageBody();
-		smtp.Send(mail);
-		Console.WriteLine($"Sent to {rcpt} via {server}");
+		Console.WriteLine("=============================");
+		Console.WriteLine($"Sending to {rcpt} via {server.Host}");
+		try {
+			var mail = new MimeMessage();
+			mail.Subject = $"Fun with Email! {rcpt}";
+			mail.From.Add(from);
+			mail.To.Add(new MailboxAddress(rcpt, rcpt));
+			var bb = new BodyBuilder();
+			var text = $"Test email from {from} to {rcpt} via {server}";
+			bb.TextBody = text;
+			mail.Body = bb.ToMessageBody();
+			smtp.Send(mail);
+			Console.WriteLine($"Sent to {rcpt} via {server}");
+		} catch (Exception ex) {
+			Console.WriteLine(ex.ToString());
+		}
 	}
+
 	smtp.Disconnect(true);
-// }
+}
+
 Console.WriteLine("Done! Press any key to exit.");
 Console.ReadKey(true);
-
-

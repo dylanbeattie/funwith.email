@@ -1,31 +1,31 @@
 @{
-    Layout = "_NoHeader";
+	Layout = "_NoHeader";
 }
 
 @model IDictionary<Guid, MailStatus>
 
 <div id="status-grid">
-    <div class="legend">
-        <span class="accepted">Ready</span>
-        <span class="queued">Queued</span>
-        <span class="sent">Sent</span>
-        <span class="deliveredtoinbox">Delivered</span>
-        <span class="deliveredtojunk">Junk</span>
+	<div class="legend">
+		<span class="accepted">Ready</span>
+		<span class="queued">Queued</span>
+		<span class="sent">Sent</span>
+		<span class="deliveredtoinbox">Delivered</span>
+		<span class="deliveredtojunk">Junk</span>
 
-    </div>
-    <div id="statuses">
-        @foreach (var item in Model)
-        {
-            <span id="mail-@item.Key" class="@item.Value.ToString().ToLowerInvariant()">
-                @@
-            </span>
-        }
-    </div>
+	</div>
+	<div id="statuses">
+		@foreach (var item in Model)
+		{
+			<span id="mail-@item.Key" class="@item.Value.ToString().ToLowerInvariant()">
+				@@
+			</span>
+		}
+	</div>
 </div>
 
 @section Scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
-    <script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+	<script>
         const connection = new signalR.HubConnectionBuilder()
             .withUrl("/hub")
             .configureLogging(signalR.LogLevel.Information)

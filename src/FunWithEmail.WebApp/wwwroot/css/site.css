@@ -1,152 +1,122 @@
 @import url('https://fonts.googleapis.com/css2?family=Salsa&display=swap');
 
 html {
-	font-size: 14px;
 	background-color: #29235c;
-	font-family: 'Salsa', Arial, Helvetica, sans-serif;
 	color: #fff;
+	font-family: 'Salsa', Arial, Helvetica, sans-serif;
+	font-size: 14px;
 	text-align: center;
 }
 
-a {
-	color: #e6007e;
-}
+a { color: #e6007e; }
 
 @media (min-width: 768px) {
-	html {
-		font-size: 16px;
-	}
+	html { font-size: 16px; }
 }
 
 html {
-	position: relative;
 	min-height: 100%;
+	position: relative;
 }
 
-body {
-	margin-bottom: 60px;
-}
+body { margin-bottom: 60px; }
 
 header > img {
+	display: block;
 	margin: 10px auto;
 	max-width: 300px;
-	display: block;
 }
 
 input {
-	padding: 8px;
 	border-radius: 8px;
 	font-family: 'Salsa', Arial, Helvetica, sans-serif;
-}
-
-	input#email-input {
-		box-sizing: border-box;
-		font-size: 120%;
-		max-width: 480px;
-		width: 80%;
-		margin: 16px;
-	}
-
-	input[type=submit] {
-		font-size: 120%;
-		padding: 10px;
-		border: 2px solid #95C11F;
-		background-color: #95C11F;
-	}
-
-footer {
-	position: fixed;
-	bottom: 0;
-	text-align: center;
 	padding: 8px;
 }
 
-div#status-grid, div#report-grid {
-	text-align: left;
+input#email-input {
+	box-sizing: border-box;
+	font-size: 120%;
+	margin: 16px;
+	max-width: 480px;
+	width: 80%;
 }
+
+input[type=submit] {
+	background-color: #95C11F;
+	border: 2px solid #95C11F;
+	font-size: 120%;
+	padding: 10px;
+}
+
+footer {
+	bottom: 0;
+	padding: 8px;
+	position: fixed;
+	text-align: center;
+}
+
+div#status-grid, div#report-grid { text-align: left; }
 
 div#report-grid h3 {
 	clear: both;
 	padding-top: 20px;
 }
+
 div#report-grid span {
-		padding: 0;
-		margin: 0;
-		width: 8px;
-		float: left;
-	}
-	div#report-grid span.accepted {
-		background-color: #fff;
-	}
-
-	div#report-grid span.queued {
-		background-color: #2daae1;
-	}
-
-	div#report-grid span.sent {
-		background-color: #F9B233;
-	}
-
-	div#report-grid span.deliveredtoinbox {
-		background-color: #95C11F;
-	}
-
-	div#report-grid span.deliveredtojunk {
-		background-color: #e6007e;
-	}
-
-div#report-grid span.error {
-		background-color: #000;
-	}
-
-	div#status-grid div.legend {
-		text-align: center;
-		border-width: 0 0 2px 0;
-		border-color: #fff;
-		border-style: solid;
-	}
-
-		div#status-grid div.legend span {
-			font-size: 24px;
-			padding: 16px;
-		}
-
-	div#status-grid span {
-		font-size: 48px;
-		padding: 4px;
-		font-weight: bold;
-		display: inline-block;
-	}
-
-.accepted {
-	color: #fff;
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 8px;
 }
 
-.queued {
-	color: #2daae1;
+div#report-grid span.accepted { background-color: #fff; }
+
+div#report-grid span.queued { background-color: #2daae1; }
+
+div#report-grid span.sent { background-color: #F9B233; }
+
+div#report-grid span.deliveredtoinbox { background-color: #95C11F; }
+
+div#report-grid span.deliveredtojunk { background-color: #e6007e; }
+
+div#report-grid span.error { background-color: #000; }
+
+div#status-grid div.legend {
+	border-color: #fff;
+	border-style: solid;
+	border-width: 0 0 2px 0;
+	text-align: center;
 }
 
-.sent {
-	color: #F9B233;
+div#status-grid div.legend span {
+	font-size: 24px;
+	padding: 16px;
 }
 
-.deliveredtoinbox {
-	color: #95C11F;
+div#status-grid span {
+	display: inline-block;
+	font-size: 48px;
+	font-weight: bold;
+	padding: 4px;
 }
 
-.deliveredtojunk {
-	color: #e6007e;
-}
+.accepted { color: #fff; }
 
-.error {
-	color: #000;
-}
+.queued { color: #2daae1; }
+
+.sent { color: #F9B233; }
+
+.deliveredtoinbox { color: #95C11F; }
+
+.deliveredtojunk { color: #e6007e; }
+
+.error { color: #000; }
 
 hr {
+	border-color: #e6007e;
+	border-style: solid;
+	border-width: 2px 0 0 0;
 	box-sizing: border-box;
 	max-width: 480px;
 	width: 80%;
-	border-width: 2px 0 0 0;
-	border-style: solid;
-	border-color: #e6007e;
 }

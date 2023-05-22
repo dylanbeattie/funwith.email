@@ -17,18 +17,18 @@
 					to confirm that you received it:
 				</mj-text>
 				<mj-button border-radius="8px"
-						   background-color="#94c11f"
-						   font-size="24px"
-						   href="__CONFIRMATION_URL__">
+				           background-color="#94c11f"
+				           font-size="24px"
+				           href="__CONFIRMATION_URL__">
 					It's in my inbox! :)
 				</mj-button>
 				<mj-text line-height="26px" font-size="16px" font-family="helvetica">
 					If it went to your junk mail folder?
 				</mj-text>
 				<mj-button border-radius="8px"
-						   background-color="#E6007E"
-						   font-size="18px"
-						   href="__CONFIRMATION_URL__?junk=true">
+				           background-color="#E6007E"
+				           font-size="18px"
+				           href="__CONFIRMATION_URL__?junk=true">
 					It went to junk mail :(
 				</mj-button>
 				<mj-divider border-color="#E6007E"></mj-divider>

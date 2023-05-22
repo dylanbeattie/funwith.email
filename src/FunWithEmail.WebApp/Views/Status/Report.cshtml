@@ -1,15 +1,15 @@
 @{
-    Layout = "_NoHeader";
+	Layout = "_NoHeader";
 }
-@model IEnumerable<IGrouping<string,MailItem>>
+@model IEnumerable<IGrouping<string, MailItem>>
 <div id="report-grid">
-    @foreach (var group in Model)
-    {
-        <h3>@group.Key:</h3>
-        @foreach (var item in group.OrderBy(item => item.Status))
-        {
-            <span class="@item.Status.ToString().ToLower()">&nbsp;</span>
-        }
-    }
+	@foreach (var group in Model)
+	{
+		<h3>@group.Key:</h3>
+		@foreach (var item in group.OrderBy(item => item.Status))
+		{
+			<span class="@item.Status.ToString().ToLower()">&nbsp;</span>
+		}
+	}
 
 </div>

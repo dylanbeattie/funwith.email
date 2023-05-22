@@ -1,5 +1,3 @@
-using FunWithEmail.WebApp.Hubs;
-
 namespace FunWithEmail.WebApp.Services {
 	public static class SmtpRelayExtensions {
 		public static WebApplicationBuilder AddSmtpServices(this WebApplicationBuilder builder) {
@@ -16,6 +14,7 @@ namespace FunWithEmail.WebApp.Services {
 					return sender;
 				});
 			}
+
 			return builder;
 		}
 	}

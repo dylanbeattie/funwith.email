@@ -1,16 +1,17 @@
 @{
-    ViewData["Title"] = "Fun with Email";
+	ViewData["Title"] = "Fun with Email";
 }
 
 <form method="POST">
-	@if (ViewData["Error"] != null) {
+	@if (ViewData["Error"] != null)
+	{
 		<p>@ViewData["Error"]</p>
 	}
 	<label for="email-input">What's your email address?</label><br/>
 	<input type="email" id="email-input" name="email" placeholder="me@example.com"/><br/>
 	<input type="submit" value="Let's go!"/>
 </form>
-<br />
+<br/>
 <hr/>
 <p>
 	<small>Your email will only be used by this demo application.</small>
