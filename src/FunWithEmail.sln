@@ -5,9 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunWithEmail.WebApp", "FunWithEmail.WebApp\FunWithEmail.WebApp.csproj", "{6F6B452F-C5BF-43EF-929E-AE8E0441FB59}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunWithEmail.Tests", "FunWithEmail.Tests\FunWithEmail.Tests.csproj", "{1E624031-9022-4692-AA35-59AA029BE315}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunWithEmail.MailTool", "FunWithEmail.MailTool\FunWithEmail.MailTool.csproj", "{1126C0C2-0EE3-4F8D-B3CC-ADF1803FC7E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunWithEmail.MailTool", "FunWithEmail.MailTool\FunWithEmail.MailTool.csproj", "{1126C0C2-0EE3-4F8D-B3CC-ADF1803FC7E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{6F6B452F-C5BF-43EF-929E-AE8E0441FB59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F6B452F-C5BF-43EF-929E-AE8E0441FB59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F6B452F-C5BF-43EF-929E-AE8E0441FB59}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1E624031-9022-4692-AA35-59AA029BE315}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E624031-9022-4692-AA35-59AA029BE315}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E624031-9022-4692-AA35-59AA029BE315}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1E624031-9022-4692-AA35-59AA029BE315}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1126C0C2-0EE3-4F8D-B3CC-ADF1803FC7E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1126C0C2-0EE3-4F8D-B3CC-ADF1803FC7E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1126C0C2-0EE3-4F8D-B3CC-ADF1803FC7E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
