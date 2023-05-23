@@ -11,10 +11,11 @@
 		<PackageReference Include="MailKit" Version="4.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.5" />
 		<PackageReference Include="MimeKit" Version="4.0.0" />
+		<PackageReference Include="Mjml.Net" Version="1.22.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\FunWithEmail.MailTool\FunWithEmail.MailTool.csproj" />
+	  <ProjectReference Include="..\FunWithEmail.Common\FunWithEmail.Common.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

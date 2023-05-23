@@ -1,7 +1,7 @@
-namespace FunWithEmail.WebApp.Models {
-	public class ErrorViewModel {
-		public string? RequestId { get; set; }
+namespace FunWithEmail.WebApp.Models; 
 
-		public bool ShowRequestId => !String.IsNullOrEmpty(RequestId);
-	}
+public class ErrorViewModel {
+	public string? RequestId { get; set; }
+
+	public bool ShowRequestId => !String.IsNullOrEmpty(RequestId);
 }

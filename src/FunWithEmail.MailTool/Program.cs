@@ -1,4 +1,4 @@
-using FunWithEmail.WebApp.Services;
+using FunWithEmail.Common;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
