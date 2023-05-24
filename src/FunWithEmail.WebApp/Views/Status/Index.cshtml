@@ -1,5 +1,5 @@
 @{
-	Layout = "_NoHeader";
+    Layout = "_NoHeader";
 }
 
 @model IDictionary<Guid, MailStatus>
@@ -11,7 +11,7 @@
 		<span class="sent">Sent</span>
 		<span class="deliveredtoinbox">Delivered</span>
 		<span class="deliveredtojunk">Junk</span>
-
+		<span class="error">Error</span>
 	</div>
 	<div id="statuses">
 		@foreach (var item in Model)
@@ -22,10 +22,12 @@
 		}
 	</div>
 </div>
-
+<a asp-action="Reset">reset</a>
+<a asp-action="Fake">fill</a>
+<a asp-action="Report">report</a>
 @section Scripts {
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
-	<script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script>
         const connection = new signalR.HubConnectionBuilder()
             .withUrl("/hub")
             .configureLogging(signalR.LogLevel.Information)

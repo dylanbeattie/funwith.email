@@ -5,7 +5,7 @@ using FunWithEmail.WebApp.Hubs;
 using FunWithEmail.WebApp.Models;
 using Microsoft.AspNetCore.SignalR;
 
-namespace FunWithEmail.WebApp.Services; 
+namespace FunWithEmail.WebApp.Services;
 
 public class StatusTracker {
 	private readonly IConfiguration config;
@@ -17,7 +17,7 @@ public class StatusTracker {
 		this.hubContext = hubContext;
 		this.config = config;
 		items = new();
-		// MakeFakeData();
+		MakeFakeData();
 	}
 
 	public IEnumerable<MailItem> AllItems => items.Values;
@@ -52,10 +52,14 @@ public class StatusTracker {
 		return id;
 	}
 
-	private async Task Update(Guid id, Action<MailItem> action) {
+	private async Task Update(Guid id, Action<MailItem> action, Exception? ex = null) {
 		if (!items.TryGetValue(id, out var item)) return;
 		action(item);
-		var data = new { id, status = item.Status.ToString().ToLowerInvariant() };
+		var data = new {
+			id,
+			status = item.Status.ToString().ToLowerInvariant(),
+			message = ex?.Message ?? String.Empty
+		};
 		var json = JsonSerializer.Serialize(data);
 		await hubContext.Clients.All.SendAsync("UpdateStatus", "hub", json);
 	}
@@ -76,10 +80,14 @@ public class StatusTracker {
 	}
 
 	public async Task MarkAsFailed(Guid id, Exception ex) {
-		await Update(id, item => item.Status = MailStatus.Error);
+		await Update(id, item => item.Status = MailStatus.Error , ex);
 	}
 
 	public async Task MarkAsQueued(Guid id) {
 		await Update(id, item => item.Status = MailStatus.Queued);
 	}
+
+	public void Fake() => MakeFakeData();
+
+	public void Reset() => items.Clear();
 }

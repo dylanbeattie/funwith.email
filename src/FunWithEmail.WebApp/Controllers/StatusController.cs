@@ -16,6 +16,16 @@ public class StatusController : Controller {
 		return View(tracker.Statuses);
 	}
 
+	public IActionResult Reset() {
+		tracker.Reset();
+		return RedirectToAction(nameof(Index));
+	}
+
+	public IActionResult Fake() {
+		tracker.Fake();
+		return RedirectToAction(nameof(Index));
+	}
+
 	public IActionResult Report() {
 		var groups = tracker
 			.AllItems
