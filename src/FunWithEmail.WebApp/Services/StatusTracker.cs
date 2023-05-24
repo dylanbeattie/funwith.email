@@ -17,7 +17,7 @@ public class StatusTracker {
 		this.hubContext = hubContext;
 		this.config = config;
 		items = new();
-		MakeFakeData();
+		// MakeFakeData();
 	}
 
 	public IEnumerable<MailItem> AllItems => items.Values;
