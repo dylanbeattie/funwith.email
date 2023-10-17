@@ -1,3 +1,4 @@
+using DnsClient;
 using FunWithEmail.Common;
 using FunWithEmail.WebApp.Models;
 using MailKit.Net.Smtp;
@@ -12,15 +13,18 @@ public class MailSender : BackgroundService {
 	private readonly SmtpSettings smtp;
 	private readonly string smtpName;
 	private readonly StatusTracker statusTracker;
+	private readonly ILookupClient dns;
 
 	public MailSender(MailQueue queue, string smtpName, SmtpSettings smtp, MailRenderer renderer,
 		StatusTracker statusTracker,
+		ILookupClient dns,	
 		ILogger<MailSender> logger) {
 		MailQueue = queue;
 		this.smtpName = smtpName;
 		this.smtp = smtp;
 		this.renderer = renderer;
 		this.statusTracker = statusTracker;
+		this.dns = dns;
 		this.logger = logger;
 		logger.LogDebug($"MailSender() with {smtp}");
 	}
@@ -35,14 +39,26 @@ public class MailSender : BackgroundService {
 		while (!token.IsCancellationRequested) {
 			var mailItem = await MailQueue.GetNextQueuedEmail();
 			try {
-				logger.LogDebug($"[Thread {Thread.CurrentThread.ManagedThreadId} {smtp} {mailItem}]");
-				await SendMail(mailItem);
-				await statusTracker.MarkAsSent(mailItem.Id, smtpName);
+				if (await CheckDns(mailItem)) {
+					logger.LogDebug($"[Thread {Thread.CurrentThread.ManagedThreadId} {smtp} {mailItem}]");
+					await SendMail(mailItem);
+					await statusTracker.MarkAsSent(mailItem.Id, smtpName);
+				} else {
+					await statusTracker.MarkAsInvalid(mailItem.Id);
+				}
 			} catch (Exception ex) {
 				await statusTracker.MarkAsFailed(mailItem.Id, ex);
 				logger.LogError(ex, "Error occurred executing {mailbox}.", mailItem);
 			}
 		}
+	}
+
+	private async Task<bool> CheckDns(MailItem mailItem) {
+		logger.LogDebug($"NS Lookup for {mailItem.Recipient.Domain}");
+		var result = await dns.QueryAsync(mailItem.Recipient.Domain, QueryType.MX);
+		if (result == null) return false;
+		if (result.HasError) return false;
+		return (result.Answers.Any());
 	}
 
 	private async Task SendMail(MailItem mailItem) {

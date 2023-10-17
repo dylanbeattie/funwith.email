@@ -14,6 +14,7 @@
 		<span class="deliveredtoinbox">Delivered</span>
 		<span class="deliveredtojunk">Junk</span>
 		<span class="error">Error</span>
+		<span class="invalid">Invalid</span>
 	</div>
 	<div id="statuses">
 		@foreach (var item in Model)
@@ -62,7 +63,7 @@
                     element = document.createElement("span");
                     element.id = elementId;
                     element.innerHTML = "@@";
-                    grid.prepend(element);
+                    grid.append(element);
                 }
             });
         start();

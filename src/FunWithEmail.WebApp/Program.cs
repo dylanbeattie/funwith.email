@@ -1,3 +1,4 @@
+using DnsClient;
 using FunWithEmail.WebApp.Hubs;
 using FunWithEmail.WebApp.Services;
 using Mjml.Net;
@@ -7,6 +8,7 @@ var mvc = builder.Services.AddControllersWithViews();
 if (builder.Environment.IsDevelopment()) mvc.AddRazorRuntimeCompilation();
 builder.Logging.AddConsole();
 builder.Services.AddSingleton<MailQueue>();
+builder.Services.AddSingleton<ILookupClient>(new LookupClient(new LookupClientOptions { UseCache = false }));
 
 var mjmlRenderer = new MjmlRenderer();
 var mjml = File.ReadAllText("Templates/FunWithEmail.mjml");

@@ -6,5 +6,6 @@ public enum MailStatus {
 	Sent,
 	DeliveredToInbox,
 	DeliveredToJunk,
-	Error
+	Error,
+	Invalid
 }

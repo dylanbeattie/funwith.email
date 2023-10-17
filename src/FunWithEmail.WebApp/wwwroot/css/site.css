@@ -117,6 +117,8 @@ div#status-grid span {
 
 .error { color: #000; }
 
+.invalid { color: #630; }
+
 hr {
 	border-color: #e6007e;
 	border-style: solid;

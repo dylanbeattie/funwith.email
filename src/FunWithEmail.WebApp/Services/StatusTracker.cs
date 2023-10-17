@@ -89,4 +89,8 @@ public class StatusTracker {
 	public void Fake() => MakeFakeData();
 
 	public void Reset() => items.Clear();
+
+	public async Task MarkAsInvalid(Guid id) {
+		await Update(id, item => item.Status = MailStatus.Invalid);
+	}
 }
