@@ -1,0 +1,8 @@
+@model System.Collections.Generic.Dictionary<string,string>
+<dl>
+	@foreach (var pair in Model)
+	{
+		<dt>@pair.Key</dt>
+		<dd>@pair.Value</dd>
+	}
+</dl>

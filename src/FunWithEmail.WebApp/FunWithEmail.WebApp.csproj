@@ -28,4 +28,12 @@
 	  </None>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Views\Status\TestRelays.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Views\Status\TestRelays.cshtml" />
+	</ItemGroup>
+
 </Project>

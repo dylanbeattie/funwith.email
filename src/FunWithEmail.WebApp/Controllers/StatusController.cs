@@ -26,6 +26,11 @@ public class StatusController : Controller {
 		return RedirectToAction(nameof(Index));
 	}
 
+	public async Task<IActionResult> TestRelays() {
+		var results = await tracker.TestRelaysAsync();
+		return View(results);
+	}
+
 	public IActionResult Report() {
 		var groups = tracker
 			.AllItems

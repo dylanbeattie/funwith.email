@@ -1,9 +1,13 @@
 using System.Collections.Concurrent;
+using System.Reflection.Metadata;
 using System.Text.Json;
 using FunWithEmail.Common;
 using FunWithEmail.WebApp.Hubs;
 using FunWithEmail.WebApp.Models;
+using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.SignalR;
+using MimeKit;
 
 namespace FunWithEmail.WebApp.Services;
 
@@ -92,5 +96,32 @@ public class StatusTracker {
 
 	public async Task MarkAsInvalid(Guid id) {
 		await Update(id, item => item.Status = MailStatus.Invalid);
+	}
+
+	private readonly MailboxAddress from = new("Fun with Email", "hello@funwith.email");
+
+	public async Task<Dictionary<string,string>> TestRelaysAsync() {
+		var result = new Dictionary<string, string>();
+		var smtpServers = new Dictionary<string, SmtpSettings>();
+		config.Bind("Smtp", smtpServers);
+		foreach (var smtp in smtpServers.Values) {
+			try {
+				var smtpClient = new SmtpClient();
+				await smtpClient.ConnectAsync(smtp.Host, smtp.Port);
+				if (smtp.Username != null) await smtpClient.AuthenticateAsync(smtp.Username, smtp.Password);
+				var mail = new MimeMessage { Subject = $"TEST via {smtp.Host} : Fun with Email!" };
+				mail.From.Add(from);
+				mail.To.Add(new MailboxAddress("dylan@dylanbeattie.net", "dylan@dylanbeattie.net"));
+				var bb = new BodyBuilder {
+					TextBody = $"Test mail via {smtp.Host}"
+				};
+				mail.Body = bb.ToMessageBody();
+				await smtpClient.SendAsync(mail);
+				result.Add(smtp.Host, "OK");
+			} catch (Exception ex) {
+				result.Add(smtp.Host, ex.Message);
+			}
+		}
+		return result;
 	}
 }
