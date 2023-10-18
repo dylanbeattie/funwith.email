@@ -25,6 +25,7 @@ Email status
 * **DeliveredToInbox**  - the user's received the mail and clicked the link.
 * **DeliveredToJunk** - the user's recieved the email but clicked the link saying it went to their junk mail
 * **Error** - something went wrong sending the email.
+* **Invalid** - no valid MX records were found for the domain part of the mail.
 
 ## Behind the scenes:
 
@@ -33,6 +34,8 @@ https://funwith.email/status shows the number of emails in the system. Email sta
 When an email is sent, it's added to the Tracker, and then placed in the MailQueue. The queue is a wrapped around a [System.Threading.Channels.Channel](https://devblogs.microsoft.com/dotnet/an-introduction-to-system-threading-channels/) - an asynchronous way of passing data between threads hosted in the same process. This means the app can run multiple MailSenders in parallel, with round-robin style load distribution - when a new item is placed in the MailQueue, the first available MailSender will consume that item and send the associated email; if all MailSenders are busy, items remain in the MailQueue until a sender becomes available.
 
 SMTP relays are defined in app configuration, and on startup, an instance of the MailSender hosted services is created for each SMTP relay defined in the app's config file - so if you have five sets of SMTP credentials, you get five MailSender services.
+
+MailSenders do a DNS lookup for the email domain before sending - if we can't find any MX records, the email is marked as **Invalid**.
 
 There's no database. Mail status is stored by the `StatusTracker`, which is built around a `ConcurrentDictionary`; when the application restarts, all history is lost, and email addresses are never stored anywhere except in memory.o the background worker service which actually sends the emails.
 
